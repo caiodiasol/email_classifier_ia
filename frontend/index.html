@@ -10,9 +10,6 @@
     <!-- Fonte -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <!-- Framer Motion -->
-    <script src="https://unpkg.com/framer-motion/dist/framer-motion.umd.js"></script>
-
     <script>
         tailwind.config = { darkMode: "class" };
     </script>
@@ -179,8 +176,18 @@
 <!-- SCRIPT -->
 <!-- ====================================================== -->
 <script>
-    const fm = window.framerMotion;
     const API_BASE_URL = (window.API_BASE_URL || "https://email-classifier-ia-8iqe.onrender.com").replace(/\/$/, "");
+    const animateResult = () => {
+        const el = document.getElementById("result");
+        if (!el || !el.animate) return;
+        el.animate(
+            [
+                { opacity: 0, transform: "translateY(20px)" },
+                { opacity: 1, transform: "translateY(0)" }
+            ],
+            { duration: 400, easing: "ease-out" }
+        );
+    };
 
     /* ======================== Tema ======================== */
     const thBtn = document.getElementById("themeToggle");
@@ -334,7 +341,7 @@
         addToHistory(text || "(arquivo)", data.category);
 
         // Animação
-        fm.animate("#result", { opacity: [0, 1], y: [20, 0] }, { duration: 0.4 });
+        animateResult();
     };
 </script>
 
