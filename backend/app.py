@@ -6,6 +6,7 @@ load_dotenv()
 
 import tempfile
 from flask import Flask, request, jsonify, send_from_directory
+from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from pdfminer.high_level import extract_text
 from nlp_utils import preprocess_for_sending, extract_keywords
@@ -18,6 +19,15 @@ from templates import TEMPLATES
 
 
 app = Flask(__name__, static_folder='../frontend', static_url_path='/')
+CORS(app, resources={
+    r"/api/*": {
+        "origins": [
+            "https://email-classifier-ia.vercel.app",
+            "http://localhost:5173",
+            "http://localhost:5000"
+        ]
+    }
+})
 
 ALLOWED_EXTENSIONS = {'pdf', 'txt'}
 MAX_SEND_CHARS = int(os.getenv("MAX_EMAIL_CHARS", "12000"))
