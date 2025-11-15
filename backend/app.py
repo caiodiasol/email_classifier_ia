@@ -1,4 +1,6 @@
 import os
+# Copyright (c) 2025 Caio Oliveira
+# License: MIT
 from dotenv import load_dotenv
 
 # Carregar variáveis ANTES de módulos dependentes
